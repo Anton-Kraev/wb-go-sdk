@@ -1,4 +1,4 @@
-package wb_go_sdk
+package wb
 
 func Temp() int {
 	return 0
