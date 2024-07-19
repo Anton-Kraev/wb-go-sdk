@@ -1,6 +1,7 @@
 package wbapi
 
 import (
+	"github.com/Anton-Kraev/wb-go-sdk/internal"
 	"github.com/Anton-Kraev/wb-go-sdk/wbcore"
 )
 
@@ -16,10 +17,13 @@ type impl struct {
 }
 
 func New(token string) WbApi {
+	reqClient := internal.NewReqClient(token)
+	httpClient := internal.NewHttpClient(reqClient)
+
 	return impl{
 		token:      token,
 		content:    wbcore.NewContent(token),
-		statistics: wbcore.NewStatistics(token),
+		statistics: wbcore.NewStatistics(token, httpClient),
 	}
 }
 
