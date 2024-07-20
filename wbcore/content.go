@@ -5,18 +5,17 @@ import "github.com/Anton-Kraev/wb-go-sdk/wbmodels"
 // Content предоставляет интерфейс категории "Контент" в WB API.
 type Content interface {
 	// ProductCardLimits реализует запрос https://openapi.wb.ru/content/api/ru/#tag/Prosmotr/paths/~1content~1v2~1cards~1limits/get.
-	ProductCardLimits(wbmodels.ProductCardLimitsRequest) wbmodels.ProductCardLimitsResponse
+	ProductCardLimits(token string, req wbmodels.ProductCardLimitsRequest) wbmodels.ProductCardLimitsResponse
 }
 
-type ContentImpl struct {
-	token string
+type contentImpl struct {
 }
 
-func NewContent(token string) Content {
-	return ContentImpl{token: token}
+func NewContent() Content {
+	return contentImpl{}
 }
 
-func (c ContentImpl) ProductCardLimits(req wbmodels.ProductCardLimitsRequest) wbmodels.ProductCardLimitsResponse {
+func (c contentImpl) ProductCardLimits(token string, req wbmodels.ProductCardLimitsRequest) wbmodels.ProductCardLimitsResponse {
 	//TODO implement me
 	panic("implement me")
 }

@@ -11,19 +11,18 @@ import (
 // Statistics предоставляет интерфейс категории "Статистика" в WB API.
 type Statistics interface {
 	// WarehousesStocks реализует запрос https://openapi.wb.ru/statistics/api/ru/#tag/Statistika/paths/~1api~1v1~1supplier~1stocks/get.
-	WarehousesStocks(wbmodels.WarehousesStocksRequest) (wbmodels.WarehousesStocksResponse, error)
+	WarehousesStocks(token string, params wbmodels.WarehousesStocksRequest) (wbmodels.WarehousesStocksResponse, error)
 
 	// SalesReport реализует запрос https://openapi.wb.ru/statistics/api/ru/#tag/Statistika/paths/~1api~1v5~1supplier~1reportDetailByPeriod/get.
 	SalesReport(wbmodels.SalesReportRequest) wbmodels.SalesReportResponse
 }
 
-type StatisticsImpl struct {
-	token      string
+type statisticsImpl struct {
 	httpClient *internal.HttpClient
 }
 
-func NewStatistics(token string, httpClient *internal.HttpClient) Statistics {
-	return StatisticsImpl{token: token, httpClient: httpClient}
+func NewStatistics(httpClient *internal.HttpClient) Statistics {
+	return statisticsImpl{httpClient: httpClient}
 }
 
 const (
@@ -38,8 +37,8 @@ var (
 	errInternal        = errors.New("ошибка на нашей строне")
 )
 
-func (s StatisticsImpl) WarehousesStocks(params wbmodels.WarehousesStocksRequest) (wbmodels.WarehousesStocksResponse, error) {
-	req := s.httpClient.Request()
+func (s statisticsImpl) WarehousesStocks(token string, params wbmodels.WarehousesStocksRequest) (wbmodels.WarehousesStocksResponse, error) {
+	req := s.httpClient.Request(token)
 
 	var respModel wbmodels.WarehousesStocksResponse
 
@@ -68,7 +67,7 @@ func (s StatisticsImpl) WarehousesStocks(params wbmodels.WarehousesStocksRequest
 	}
 }
 
-func (s StatisticsImpl) SalesReport(params wbmodels.SalesReportRequest) wbmodels.SalesReportResponse {
+func (s statisticsImpl) SalesReport(params wbmodels.SalesReportRequest) wbmodels.SalesReportResponse {
 	//TODO implement me
 	panic("implement me")
 }

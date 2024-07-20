@@ -12,6 +12,6 @@ func NewHttpClient(client *req.Client) *HttpClient {
 	return &HttpClient{client: client}
 }
 
-func (c *HttpClient) Request() *req.Request {
-	return c.client.R()
+func (c *HttpClient) Request(token string) *req.Request {
+	return c.client.R().SetHeader("Authorization", token)
 }
