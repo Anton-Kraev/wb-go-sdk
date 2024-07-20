@@ -8,15 +8,15 @@ type Content interface {
 	ProductCardLimits(wbmodels.ProductCardLimitsRequest) wbmodels.ProductCardLimitsResponse
 }
 
-type contentImpl struct {
+type ContentImpl struct {
 	token string
 }
 
 func NewContent(token string) Content {
-	return contentImpl{token: token}
+	return ContentImpl{token: token}
 }
 
-func (c contentImpl) ProductCardLimits(req wbmodels.ProductCardLimitsRequest) wbmodels.ProductCardLimitsResponse {
+func (c ContentImpl) ProductCardLimits(req wbmodels.ProductCardLimitsRequest) wbmodels.ProductCardLimitsResponse {
 	//TODO implement me
 	panic("implement me")
 }

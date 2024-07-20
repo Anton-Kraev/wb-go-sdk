@@ -17,13 +17,13 @@ type Statistics interface {
 	SalesReport(wbmodels.SalesReportRequest) wbmodels.SalesReportResponse
 }
 
-type statisticsImpl struct {
+type StatisticsImpl struct {
 	token      string
 	httpClient *internal.HttpClient
 }
 
 func NewStatistics(token string, httpClient *internal.HttpClient) Statistics {
-	return statisticsImpl{token: token, httpClient: httpClient}
+	return StatisticsImpl{token: token, httpClient: httpClient}
 }
 
 const (
@@ -38,7 +38,7 @@ var (
 	errInternal        = errors.New("ошибка на нашей строне")
 )
 
-func (s statisticsImpl) WarehousesStocks(params wbmodels.WarehousesStocksRequest) (wbmodels.WarehousesStocksResponse, error) {
+func (s StatisticsImpl) WarehousesStocks(params wbmodels.WarehousesStocksRequest) (wbmodels.WarehousesStocksResponse, error) {
 	req := s.httpClient.Request()
 
 	var respModel wbmodels.WarehousesStocksResponse
@@ -68,7 +68,7 @@ func (s statisticsImpl) WarehousesStocks(params wbmodels.WarehousesStocksRequest
 	}
 }
 
-func (s statisticsImpl) SalesReport(params wbmodels.SalesReportRequest) wbmodels.SalesReportResponse {
+func (s StatisticsImpl) SalesReport(params wbmodels.SalesReportRequest) wbmodels.SalesReportResponse {
 	//TODO implement me
 	panic("implement me")
 }

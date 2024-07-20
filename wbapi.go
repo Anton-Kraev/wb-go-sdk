@@ -10,7 +10,7 @@ type WbApi interface {
 	Statistics() wbcore.Statistics
 }
 
-type impl struct {
+type Impl struct {
 	token      string
 	content    wbcore.Content
 	statistics wbcore.Statistics
@@ -20,17 +20,17 @@ func New(token string) WbApi {
 	reqClient := internal.NewReqClient(token)
 	httpClient := internal.NewHttpClient(reqClient)
 
-	return impl{
+	return Impl{
 		token:      token,
 		content:    wbcore.NewContent(token),
 		statistics: wbcore.NewStatistics(token, httpClient),
 	}
 }
 
-func (i impl) Content() wbcore.Content {
+func (i Impl) Content() wbcore.Content {
 	return i.content
 }
 
-func (i impl) Statistics() wbcore.Statistics {
+func (i Impl) Statistics() wbcore.Statistics {
 	return i.statistics
 }
